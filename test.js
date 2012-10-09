@@ -18,11 +18,20 @@ test(0xFFFFFFFFFFFFF)
 test(0x1FFFFFFFFFFFFF)
 
 try {
+	var b = new Buffer('FFFFFFFFFFFFFFFF', 'hex')
+	var x = int53.readUInt64BE(b)
+	assert(false)
+}
+catch (e) {
+	assert(e.message === 'number too large', e.message)
+}
+
+try {
 	test(0x1FFFFFFFFFFFFF + 1)
 	assert(false)
 }
 catch (e) {
-	assert(e.message === 'number out of range')
+	assert(e.message === 'number out of range', e.message)
 }
 
 try {
@@ -30,7 +39,7 @@ try {
 	assert(false)
 }
 catch (e) {
-	assert(e.message === 'number out of range')
+	assert(e.message === 'number out of range', e.message)
 }
 
 try {
@@ -38,5 +47,7 @@ try {
 	assert(false)
 }
 catch (e) {
-	assert(e.message === 'number must be an integer')
+	assert(e.message === 'number must be an integer', e.message)
 }
+
+console.log("SUCCESS!")

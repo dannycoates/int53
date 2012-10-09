@@ -24,7 +24,7 @@ int53.readUInt64BE = function (buffer, offset) {
 	offset = offset || 0
 	var high = buffer.readUInt32BE(offset)
 	var low = buffer.readUInt32BE(offset + 4)
-	assert(high < 0x00200000, "number too large")
+	assert((high & 0xFFE00000) === 0, "number too large")
 	return (high * (MAX_UINT32 + 1)) + low
 }
 
