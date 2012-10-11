@@ -16,11 +16,13 @@ var b = Buffer('0000FFFFFFFFFFFF', 'hex')
 var x = int53.readUInt64BE(b)
 ```
 
-## todo
+## why?
 
-* writeInt64BE
-* readInt64BE
-* writeUInt64LE
-* readUInt64LE
-* writeInt64LE
-* readInt64LE
+Sometimes you need to read and write 64-bit integers. For some
+things like timestamps, file sizes, and counters the 53-bits
+offered by a double is enough to get by, and easier to work with
+than a bigint module.
+
+## License
+
+BSD
