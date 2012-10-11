@@ -19,10 +19,10 @@ var x = int53.readUInt64BE(b)
 # API
 
 ```js
-int53.readInt64BE(buffer, offset)
-int53.readInt64LE(buffer, offset)
-int53.readUInt64BE(buffer, offset)
-int53.readUInt64LE(buffer, offset)
+var number = int53.readInt64BE(buffer, offset)
+var number = int53.readInt64LE(buffer, offset)
+var number = int53.readUInt64BE(buffer, offset)
+var number = int53.readUInt64LE(buffer, offset)
 
 int53.writeInt64BE(number, buffer, offset)
 int53.writeInt64LE(number, buffer, offset)

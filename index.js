@@ -5,6 +5,14 @@ var int53 = {}
 var MAX_UINT32 = 0x00000000FFFFFFFF
 var MAX_INT53 =  0x001FFFFFFFFFFFFF
 
+function onesComplement(number) {
+	number = ~number
+	if (number < 0) {
+		number = (number & 0x7FFFFFFF) + 0x80000000
+	}
+	return number
+}
+
 function uintHighLow(number) {
 	assert(number > -1 && number <= MAX_INT53, "number out of range")
 	assert(Math.floor(number) === number, "number must be an integer")
@@ -21,10 +29,7 @@ function intHighLow(number) {
 	if (number > -1) {
 		return uintHighLow(number)
 	}
-	assert(Math.ceil(number) === number, "number must be an integer")
-	var pos = -number
-	assert(pos <= MAX_INT53, "number out of range")
-	var hl = uintHighLow(pos)
+	var hl = uintHighLow(-number)
 	high = onesComplement(hl[0])
 	low = onesComplement(hl[1])
 	if (low === MAX_UINT32) {
@@ -35,14 +40,6 @@ function intHighLow(number) {
 		low += 1
 	}
 	return [high, low]
-}
-
-function onesComplement(number) {
-	number = ~number
-	if (number < 0) {
-		number = (number & 0x7FFFFFFF) + 0x80000000
-	}
-	return number
 }
 
 function toDouble(high, low, signed) {
