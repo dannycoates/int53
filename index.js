@@ -20,7 +20,7 @@ function uintHighLow(number) {
 	var signbit = number & 0xFFFFFFFF
 	var low = signbit < 0 ? (number & 0x7FFFFFFF) + 0x80000000 : signbit
 	if (number > MAX_UINT32) {
-		high = Math.floor((number - low) / MAX_UINT32)
+		high = (number - low) / (MAX_UINT32 + 1)
 	}
 	return [high, low]
 }
@@ -30,8 +30,8 @@ function intHighLow(number) {
 		return uintHighLow(number)
 	}
 	var hl = uintHighLow(-number)
-	high = onesComplement(hl[0])
-	low = onesComplement(hl[1])
+	var high = onesComplement(hl[0])
+	var low = onesComplement(hl[1])
 	if (low === MAX_UINT32) {
 		high += 1
 		low = 0
@@ -46,11 +46,11 @@ function toDouble(high, low, signed) {
 	if (signed && (high & 0x80000000) !== 0) {
 		high = onesComplement(high)
 		low = onesComplement(low)
-		assert((high & 0xFFE00000) === 0, "number too small")
+		assert(high < 0x00200000, "number too small")
 		return -((high * (MAX_UINT32 + 1)) + low + 1)
 	}
 	else { //positive
-		assert((high & 0xFFE00000) === 0, "number too large")
+		assert(high < 0x00200000, "number too large")
 		return (high * (MAX_UINT32 + 1)) + low
 	}
 }
