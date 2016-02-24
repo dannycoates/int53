@@ -3,6 +3,9 @@
   "version": "0.2.3",
   "description": "silly 53bit integer buffer serialization",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "node test.js"
   },
@@ -17,5 +20,8 @@
     "number"
   ],
   "author": "Danny Coates <dannycoates@gmail.com>",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "minimalistic-assert": "^1.0.0"
+  }
 }
