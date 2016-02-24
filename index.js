@@ -1,5 +1,3 @@
-var assert = require('minimalistic-assert')
-
 var int53 = {}
 
 var MAX_UINT32 = 0x00000000FFFFFFFF
@@ -14,8 +12,8 @@ function onesComplement(number) {
 }
 
 function uintHighLow(number) {
-	assert(number > -1 && number <= MAX_INT53, "number out of range")
-	assert(Math.floor(number) === number, "number must be an integer")
+	console.assert(number > -1 && number <= MAX_INT53, "number out of range")
+	console.assert(Math.floor(number) === number, "number must be an integer")
 	var high = 0
 	var signbit = number & 0xFFFFFFFF
 	var low = signbit < 0 ? (number & 0x7FFFFFFF) + 0x80000000 : signbit
@@ -46,11 +44,11 @@ function toDouble(high, low, signed) {
 	if (signed && (high & 0x80000000) !== 0) {
 		high = onesComplement(high)
 		low = onesComplement(low)
-		assert(high < 0x00200000, "number too small")
+		console.assert(high < 0x00200000, "number too small")
 		return -((high * (MAX_UINT32 + 1)) + low + 1)
 	}
 	else { //positive
-		assert(high < 0x00200000, "number too large")
+		console.assert(high < 0x00200000, "number too large")
 		return (high * (MAX_UINT32 + 1)) + low
 	}
 }
