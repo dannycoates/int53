@@ -1,6 +1,6 @@
 {
   "name": "int53",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "silly 53bit integer buffer serialization",
   "main": "index.js",
   "files": [
@@ -20,8 +20,5 @@
     "number"
   ],
   "author": "Danny Coates <dannycoates@gmail.com>",
-  "license": "BSD",
-  "dependencies": {
-    "minimalistic-assert": "^1.0.0"
-  }
+  "license": "BSD-3-Clause"
 }
