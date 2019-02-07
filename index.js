@@ -3,6 +3,10 @@ var int53 = {}
 var MAX_UINT32 = 0x00000000FFFFFFFF
 var MAX_INT53 =  0x001FFFFFFFFFFFFF
 
+function assert (test, message) {
+	if(!test) throw new Error(message)
+}
+
 function onesComplement(number) {
 	number = ~number
 	if (number < 0) {
@@ -12,8 +16,8 @@ function onesComplement(number) {
 }
 
 function uintHighLow(number) {
-	console.assert(number > -1 && number <= MAX_INT53, "number out of range")
-	console.assert(Math.floor(number) === number, "number must be an integer")
+	assert(number > -1 && number <= MAX_INT53, "number out of range")
+	assert(Math.floor(number) === number, "number must be an integer")
 	var high = 0
 	var signbit = number & 0xFFFFFFFF
 	var low = signbit < 0 ? (number & 0x7FFFFFFF) + 0x80000000 : signbit
@@ -44,11 +48,11 @@ function toDouble(high, low, signed) {
 	if (signed && (high & 0x80000000) !== 0) {
 		high = onesComplement(high)
 		low = onesComplement(low)
-		console.assert(high < 0x00200000, "number too small")
+		assert(high < 0x00200000, "number too small")
 		return -((high * (MAX_UINT32 + 1)) + low + 1)
 	}
 	else { //positive
-		console.assert(high < 0x00200000, "number too large")
+		assert(high < 0x00200000, "number too large")
 		return (high * (MAX_UINT32 + 1)) + low
 	}
 }
