@@ -1,6 +1,6 @@
 {
   "name": "int53",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "description": "silly 53bit integer buffer serialization",
   "main": "index.js",
   "files": [
