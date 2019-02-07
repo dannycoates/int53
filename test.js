@@ -1,30 +1,34 @@
 var int53 = require('./index')
 
+function assert (test) {
+	if(!test) throw new Error('assert failed')
+}
+
 function testUInt64(x) {
 	var b = new Buffer(8)
 	int53.writeUInt64BE(x, b)
-	console.assert(x === int53.readUInt64BE(b))
+	assert(x === int53.readUInt64BE(b))
 
 	int53.writeUInt64LE(x, b)
-	console.assert(x === int53.readUInt64LE(b))
+	assert(x === int53.readUInt64LE(b))
 }
 
 function testInt64(x) {
 	var b = new Buffer(8)
 	int53.writeInt64BE(x, b)
-	console.assert(x === int53.readInt64BE(b))
+	assert(x === int53.readInt64BE(b))
 
 	int53.writeInt64LE(x, b)
-	console.assert(x === int53.readInt64LE(b))
+	assert(x === int53.readInt64LE(b))
 }
 
 function error(func, number, message) {
 	try {
 		func(number)
-		console.assert(false)
+		assert(false)
 	}
 	catch (e) {
-		console.assert(e.message === message, e.message)
+		assert(e.message === message, e.message)
 	}
 }
 
@@ -64,10 +68,10 @@ error(testInt64, -1.1, 'number must be an integer')
 try {
 	var b = new Buffer('FFDFFFFFFFFFFFFF', 'hex')
 	var x = int53.readInt64BE(b)
-	console.assert(false)
+	assert(false)
 }
 catch (e) {
-	console.assert(e.message === 'number too small', e.message)
+	assert(e.message === 'number too small', e.message)
 }
 
 console.log("SUCCESS!")
