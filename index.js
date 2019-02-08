@@ -58,57 +58,57 @@ function toDouble(high, low, signed) {
 }
 
 int53.readInt64BE = function (buffer, offset) {
-	offset = offset || 0
+	offset = offset | 0
 	var high = buffer.readUInt32BE(offset)
 	var low = buffer.readUInt32BE(offset + 4)
 	return toDouble(high, low, true)
 }
 
 int53.readInt64LE = function (buffer, offset) {
-	offset = offset || 0
+	offset = offset | 0
 	var low = buffer.readUInt32LE(offset)
 	var high = buffer.readUInt32LE(offset + 4)
 	return toDouble(high, low, true)
 }
 
 int53.readUInt64BE = function (buffer, offset) {
-	offset = offset || 0
+	offset = offset | 0
 	var high = buffer.readUInt32BE(offset)
 	var low = buffer.readUInt32BE(offset + 4)
 	return toDouble(high, low, false)
 }
 
 int53.readUInt64LE = function (buffer, offset) {
-	offset = offset || 0
+	offset = offset | 0
 	var low = buffer.readUInt32LE(offset)
 	var high = buffer.readUInt32LE(offset + 4)
 	return toDouble(high, low, false)
 }
 
 int53.writeInt64BE = function (number, buffer, offset) {
-	offset = offset || 0
-	var hl = intHighLow(number)
+	offset = offset | 0
+	var hl = intHighLow(+number)
 	buffer.writeUInt32BE(hl[0], offset)
 	buffer.writeUInt32BE(hl[1], offset + 4)
 }
 
 int53.writeInt64LE = function (number, buffer, offset) {
-	offset = offset || 0
-	var hl = intHighLow(number)
+	offset = offset | 0
+	var hl = intHighLow(+number)
 	buffer.writeUInt32LE(hl[1], offset)
 	buffer.writeUInt32LE(hl[0], offset + 4)
 }
 
 int53.writeUInt64BE = function (number, buffer, offset) {
-	offset = offset || 0
-	var hl = uintHighLow(number)
+	offset = offset | 0
+	var hl = uintHighLow(+number)
 	buffer.writeUInt32BE(hl[0], offset)
 	buffer.writeUInt32BE(hl[1], offset + 4)
 }
 
 int53.writeUInt64LE = function (number, buffer, offset) {
-	offset = offset || 0
-	var hl = uintHighLow(number)
+	offset = offset | 0
+	var hl = uintHighLow(+number)
 	buffer.writeUInt32LE(hl[1], offset)
 	buffer.writeUInt32LE(hl[0], offset + 4)
 }
